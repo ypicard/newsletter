@@ -36,7 +36,6 @@ class InvitationsController < ApplicationController
     else
       # If email
       invitee = User.where(email: invitation_params[:email]).first
-      # todo: if invitee exist, invite him in app, else send an email to create new account
     end
 
     @invitation.user = invitee

@@ -9,6 +9,8 @@ class Invitation < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :community
 
+  after_create :send_new_invitation_email
+
   def accept
     self.status = ACCEPTED
     user.communities << community
@@ -18,5 +20,11 @@ class Invitation < ApplicationRecord
   def reject
     self.status = REJECTED
     save
+  end
+
+  private
+
+  def send_new_invitation_email
+    InvitationMailer.new_invitation_email(email, community).deliver_later
   end
 end

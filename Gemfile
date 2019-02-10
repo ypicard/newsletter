@@ -42,6 +42,8 @@ gem 'devise', '~> 4.6.0'
 gem 'awesome_print', '~> 1.8'
 # Figaro for env variables
 gem 'figaro', '~> 1.1.1'
+# Mailgun
+gem 'mailgun-ruby', '~>1.1.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
