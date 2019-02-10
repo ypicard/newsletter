@@ -1,0 +1,8 @@
+<%= form_for(@community) do |f| %>
+<% if @community.errors.any? %>
+  <%= @community.errors.full_messages %>
+<% end %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>

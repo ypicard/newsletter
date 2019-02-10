@@ -1,0 +1,23 @@
+<h1>Home</h1>
+<h2>Your communities</h2>
+<% if current_user.communities.empty? %>
+  <div>No Communities yet</div>
+  <%= link_to "Create yours now", new_community_path%>
+<% else %>
+  <% current_user.communities.each do |community| %>
+    <div>
+      <%= link_to community.name, community_path(community) %>
+    </div>
+  <%end%>
+<% end %>
+<div>
+  <%= link_to "Create yours now", new_community_path%>
+</div>
+<h2>Invitations</h2>
+<% current_user.invitations.each do |invitation| %>
+  <div><%= invitation.to_json %></div>
+  <% if invitation.status.eql?(Invitation::PENDING) %>
+    <%= button_to 'Accept', { controller: :invitations, action: :accept, method: :post, community_id: invitation.community.id, id: invitation.id } %>
+    <%= button_to 'Reject', { controller: :invitations, action: :reject, method: :post, community_id: invitation.community.id, id: invitation.id } %>
+  <% end %>
+<% end %>

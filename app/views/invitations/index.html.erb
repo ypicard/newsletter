@@ -1,0 +1,7 @@
+<% if @invitations.any? %>
+  <% @invitations.each do |invitation| %>
+    <div><%= invitation.to_json%></div>
+  <% end %>
+<% else %>
+  <div>No invites</div>
+<%end %>
