@@ -9,6 +9,8 @@ class Invitation < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :community
 
+  attr_accessor :username
+
   after_create :send_new_invitation_email
 
   def accept

@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :communities, -> { distinct }, through: :memberships
   has_many :invitations
+  has_many :links
 
   private
 

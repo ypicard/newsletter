@@ -1,0 +1,10 @@
+<h1>Links#new</h1>
+
+<%= form_for [@community, @link] do |f| %>
+<% if @link.errors.any? %>
+  <%= @link.errors.full_messages %>
+<% end %>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+  <%= f.submit %>
+<% end %>

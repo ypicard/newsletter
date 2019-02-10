@@ -1,2 +1,2 @@
 <h1>Community created: <%= @community.name %></h1>
-<%= link_to "Invite members", community_invite_path %>
+<%= link_to "Invite members", new_community_invitation_path(@community) %>

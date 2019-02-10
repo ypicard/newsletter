@@ -2,7 +2,6 @@
 <h2>Your communities</h2>
 <% if current_user.communities.empty? %>
   <div>No Communities yet</div>
-  <%= link_to "Create yours now", new_community_path%>
 <% else %>
   <% current_user.communities.each do |community| %>
     <div>

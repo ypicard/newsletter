@@ -2,5 +2,16 @@
 <div>
   <%= @community.to_json %>
 </div>
-<%= link_to "Invite members", new_community_invitation_path(@community) %>
-<%= link_to "See current invites", community_invitations_path(@community) %>
+<h2>Links</h2>
+<% @community.links.each do |link| %>
+  <%= link.to_json %>
+<% end %>
+<div>
+  <%= link_to "Invite members", new_community_invitation_path(@community) %>
+</div>
+<div>
+  <%= link_to "See current invites", community_invitations_path(@community) %>
+</div>
+<div>
+  <%= link_to "Post link", new_community_link_path(@community) %>
+</div>

@@ -6,6 +6,7 @@ class Community < ApplicationRecord
   has_many :memberships
   has_many :users, through: :memberships
   has_many :invitations
+  has_many :links
 
-  belongs_to :creator, class_name: :User
+  belongs_to :creator, class_name: :User # todo: should be in memberships table as a role
 end

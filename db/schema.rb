@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_09_114105) do
+ActiveRecord::Schema.define(version: 2019_02_10_132149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 2019_02_09_114105) do
 
   create_table "invitations", force: :cascade do |t|
     t.string "email"
-    t.string "username"
     t.string "token", null: false
     t.string "status", default: "PENDING", null: false
     t.bigint "sender_id"
@@ -38,6 +37,21 @@ ActiveRecord::Schema.define(version: 2019_02_09_114105) do
     t.index ["sender_id"], name: "index_invitations_on_sender_id"
     t.index ["token"], name: "index_invitations_on_token", unique: true
     t.index ["user_id"], name: "index_invitations_on_user_id"
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.string "url", null: false
+    t.string "lp_title"
+    t.string "lp_description"
+    t.string "lp_image"
+    t.string "lp_url"
+    t.bigint "user_id"
+    t.bigint "community_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["community_id"], name: "index_links_on_community_id"
+    t.index ["url", "user_id", "community_id"], name: "index_links_on_url_and_user_id_and_community_id", unique: true
+    t.index ["user_id"], name: "index_links_on_user_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -64,6 +78,5 @@ ActiveRecord::Schema.define(version: 2019_02_09_114105) do
   end
 
   add_foreign_key "communities", "users", column: "creator_id"
-  add_foreign_key "invitations", "users"
   add_foreign_key "invitations", "users", column: "sender_id"
 end

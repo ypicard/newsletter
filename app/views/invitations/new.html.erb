@@ -1,11 +1,10 @@
 <h1>Invitations#new</h1>
 <%= form_for [@community, @invitation] do |f| %>
-    <% if @invitation.errors.any? %>
+  <% if @invitation.errors.any? %>
     <%= @invitation.errors.full_messages %>
-    <% end %>
+  <% end %>
   <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   <%= f.label :username %>
-    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>  <%= f.submit %>
-
+  <%= f.text_field :username, autofocus: true, autocomplete: "username" %>  <%= f.submit %>
 <% end %>
