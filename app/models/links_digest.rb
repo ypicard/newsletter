@@ -1,0 +1,2 @@
+class LinksDigest < ApplicationRecord
+end
