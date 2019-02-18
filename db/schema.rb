@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_10_132149) do
+ActiveRecord::Schema.define(version: 2019_02_10_164831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,15 +41,16 @@ ActiveRecord::Schema.define(version: 2019_02_10_132149) do
 
   create_table "links", force: :cascade do |t|
     t.string "url", null: false
-    t.string "lp_title"
-    t.string "lp_description"
-    t.string "lp_image"
-    t.string "lp_url"
+    t.string "title"
+    t.string "description"
+    t.string "image"
     t.bigint "user_id"
     t.bigint "community_id"
+    t.bigint "newsletter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["community_id"], name: "index_links_on_community_id"
+    t.index ["newsletter_id"], name: "index_links_on_newsletter_id"
     t.index ["url", "user_id", "community_id"], name: "index_links_on_url_and_user_id_and_community_id", unique: true
     t.index ["user_id"], name: "index_links_on_user_id"
   end
@@ -61,6 +62,32 @@ ActiveRecord::Schema.define(version: 2019_02_10_132149) do
     t.datetime "updated_at", null: false
     t.index ["community_id"], name: "index_memberships_on_community_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "newsletter_links", id: false, force: :cascade do |t|
+    t.bigint "link_id"
+    t.bigint "newsletter_id"
+    t.index ["link_id"], name: "index_newsletter_links_on_link_id"
+    t.index ["newsletter_id"], name: "index_newsletter_links_on_newsletter_id"
+  end
+
+  create_table "newsletter_users", id: false, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "newsletter_id"
+    t.index ["newsletter_id"], name: "index_newsletter_users_on_newsletter_id"
+    t.index ["user_id"], name: "index_newsletter_users_on_user_id"
+  end
+
+  create_table "newsletters", force: :cascade do |t|
+    t.string "period", null: false
+    t.boolean "delivered", default: false, null: false
+    t.integer "week"
+    t.integer "month"
+    t.integer "year"
+    t.bigint "community_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["community_id"], name: "index_newsletters_on_community_id"
   end
 
   create_table "users", force: :cascade do |t|

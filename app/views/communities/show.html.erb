@@ -6,6 +6,11 @@
 <% @community.links.each do |link| %>
   <%= link.to_json %>
 <% end %>
+<h2>Newsletters</h2>
+<% @community.newsletters.each do |newsletter| %>
+  <%= newsletter.to_json %>
+  <%= button_to "Send", send_email_community_newsletter_path(@community, newsletter), :class => "button" %>
+<% end %>
 <div>
   <%= link_to "Invite members", new_community_invitation_path(@community) %>
 </div>
@@ -14,4 +19,7 @@
 </div>
 <div>
   <%= link_to "Post link", new_community_link_path(@community) %>
+</div>
+<div>
+  <%= link_to "Generate newsletter", new_community_newsletter_path(@community) %>
 </div>

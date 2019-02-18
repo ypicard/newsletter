@@ -18,11 +18,9 @@ class Link < ApplicationRecord
                                 'q' => self.url }.to_json)
 
     body = JSON.parse(response.body)
-    self.lp_title = body['title']
-    self.lp_url = body['url']
-    self.lp_image = body['image']
-    self.lp_image = body['image']
-    self.lp_description = body['description']
+    self.title = body['title']
+    self.image = body['image']
+    self.description = body['description']
     save
   end
 

@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
   resources :communities do
     resources :links
+    resources :newsletters do 
+      post :send_email, on: :member
+    end
+
     resources :invitations do
       post :accept, on: :member
       post :reject, on: :member

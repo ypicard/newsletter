@@ -23,10 +23,6 @@ class CommunitiesController < ApplicationController
     end
   end
 
-  def update; end
-
-  def invite; end
-
   private
 
   def community_params

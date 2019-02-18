@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class LinksDigestTest < ActiveSupport::TestCase
+class CommunityNewsletterTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class NewsletterMailer < ApplicationMailer
-  def weekly_email(community)
+  def weekly_newsletter_email(community, users, links)
     @community = community
+    @links = links
     # TODO: say how many weekly digest there has already been in subject
-    # TODO: create newsletter model
-    mail(to: community.users.map(&:email), subject: "#{@community.name} - weekly digest")
+    mail(to: users.map(&:email), subject: "#{@community.name} - weekly digest")
   end
 end

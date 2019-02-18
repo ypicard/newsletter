@@ -1,0 +1,14 @@
+<h1>NEWSLETTER</h1>
+<%= @newsletter.to_json %>
+<h2>Users</h2>
+<%= @newsletter.users.to_json %>
+
+<h2>Links</h2>
+<%= @newsletter.links.to_json %>
+
+<%= form_for [@community, @newsletter] do |f| %>
+    <% if @newsletter.errors.any? %>
+    <%= @newsletter.errors.full_messages %>
+    <% end %>
+    <%= f.submit %>
+<% end %>
