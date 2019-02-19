@@ -1,0 +1,13 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title is-1 is-inline"><%= @community.name %></h1>
+    <small>(<%= pluralize(@community.users.size, 'member') %>)</small>
+    <h2 class="subtitle is-3"><%= @community.description %></h2>
+
+    <div class="buttons">
+      <%= link_to "Links", community_path(@community), class: "button" %> <%=
+      link_to "Post link", new_community_link_path(@community), class: "button is-info" %> <%=
+      link_to "Invite members", community_invitations_path(@community), class:"button" %>
+    </div>
+  </div>
+</section>

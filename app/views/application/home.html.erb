@@ -1,22 +1,25 @@
-<h1>Home</h1>
-<h2>Your communities</h2>
-<% if current_user.communities.empty? %>
-  <div>No Communities yet</div>
-<% else %>
-  <% current_user.communities.each do |community| %>
-    <div>
-      <%= link_to community.name, community_path(community) %>
+<section class="section">
+  <div class="container">
+    <% if current_user.communities.empty? %>
+    <div>No Communities yet</div>
+    <% else %>
+    <% current_user.communities.each do |community| %>
+
+    <h3 class="title">
+      <%= community.name %>
+    </h3>
+    <%= form_for [community, Link.new] do |f| %>
+
+    <div class="field has-addons">
+      <div class="control">
+        <%= f.text_field :url, class: "input is-small", placeholder: "Link..." %>
+      </div>
+      <div class="control">
+        <%= f.submit "Send", class: "button is-small" %>
+      </div>
     </div>
-  <%end%>
-<% end %>
-<div>
-  <%= link_to "Create yours now", new_community_path%>
-</div>
-<h2>Invitations</h2>
-<% current_user.invitations.each do |invitation| %>
-  <div><%= invitation.to_json %></div>
-  <% if invitation.status.eql?(Invitation::PENDING) %>
-    <%= button_to 'Accept', { controller: :invitations, action: :accept, method: :post, community_id: invitation.community.id, id: invitation.id } %>
-    <%= button_to 'Reject', { controller: :invitations, action: :reject, method: :post, community_id: invitation.community.id, id: invitation.id } %>
-  <% end %>
-<% end %>
+
+    <% end %> <%end%> <% end %>
+  
+  </div>
+</section>

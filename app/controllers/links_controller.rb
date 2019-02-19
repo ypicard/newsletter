@@ -12,7 +12,7 @@ class LinksController < ApplicationController
     @link = Link.new(link_params.merge(user: current_user, community: @community))
 
     if @link.save
-      render 'create'
+      flash[:primary] = 'Link published'
     else
       render 'new'
     end

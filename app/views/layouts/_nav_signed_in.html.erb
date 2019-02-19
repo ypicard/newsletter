@@ -1,2 +1,26 @@
-<%= link_to('Home', root_path) %>
-<%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <%= link_to 'Home', root_path, class: "navbar-item" %>
+    <a
+      role="button"
+      class="navbar-burger burger"
+      aria-label="menu"
+      aria-expanded="false"
+      onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div class="navbar-menu">
+    <div class="navbar-start">
+      <%= link_to 'Your communities', communities_path, class: "navbar-item" %>
+      <%= link_to 'Invitations', invitations_path, class: "navbar-item" %>
+    </div>
+    <div class="navbar-end">
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "navbar-item" %>
+    </div>
+  </div>
+</nav>

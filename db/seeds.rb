@@ -9,5 +9,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create(username: 'lewarthog', email: 'lewarthog@hotmail.com', password: 'lewarthog')
-Community.create(name:"Devs", creator: User.first, users: [User.first])
+Community.create(name:"Devs", description: "Useful programming links", creator: User.first, users: [User.first])
 Link.create(url: 'https://www.theverge.com', user: User.first, community: Community.first)
+Invitation.create(sender: User.first, user: User.first, community: Community.first)

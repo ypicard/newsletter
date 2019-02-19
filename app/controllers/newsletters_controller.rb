@@ -12,9 +12,9 @@ class NewslettersController < ApplicationController
         @newsletter = @community.generate_newsletter(Newsletter::WEEKLY, date.cweek, date.month, date.year)
 
         if @newsletter.save
-            flash[:notice] = 'Newsletter created'
+            flash[:primary] = 'Newsletter created'
         else
-            flash[:alert] = 'Something went wrong'
+            flash[:warning] = 'Something went wrong'
             render action: 'new'
         end
     end

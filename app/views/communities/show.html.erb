@@ -1,25 +1,45 @@
-<h1>Communities#show</h1>
-<div>
-  <%= @community.to_json %>
+<%= render "communities/shared/header" %>
+
+<div class="container">
+
+  <h3 class="title">Latest links</h3>
+  <% @community.links.each do |link| %>
+
+  <article class="media" href="#{link.url}">
+    <figure class="media-left">
+      <p class="image is-64x64">
+        <%= image_tag(link.image) %>
+      </p>
+    </figure>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong
+            ><%= link.title %> <%= link_to link.url, target: "_blank" do %>
+            <span class="icon">
+              <%= fa_icon "external-link" %>
+            </span>
+            <% end %>
+          </strong>
+          <br />
+          <%= link.description %>
+          <br />
+          <small
+            >Posted by @<%= link.user.username %> (<%= link.created_at.strftime("%Y-%m-%d")
+            %>)</small
+          >
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <% end %>
 </div>
-<h2>Links</h2>
-<% @community.links.each do |link| %>
-  <%= link.to_json %>
-<% end %>
-<h2>Newsletters</h2>
-<% @community.newsletters.each do |newsletter| %>
-  <%= newsletter.to_json %>
-  <%= button_to "Send", send_email_community_newsletter_path(@community, newsletter), :class => "button" %>
-<% end %>
-<div>
-  <%= link_to "Invite members", new_community_invitation_path(@community) %>
-</div>
-<div>
-  <%= link_to "See current invites", community_invitations_path(@community) %>
-</div>
-<div>
-  <%= link_to "Post link", new_community_link_path(@community) %>
-</div>
+
+<h2>Latest newsletters</h2>
+<% @community.newsletters.each do |newsletter| %> <%= newsletter.to_json %> <%= button_to "Send",
+send_email_community_newsletter_path(@community, newsletter), :class => "button" %> <% end %>
+
 <div>
   <%= link_to "Generate newsletter", new_community_newsletter_path(@community) %>
 </div>

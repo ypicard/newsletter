@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2019_02_10_164831) do
 
   create_table "communities", force: :cascade do |t|
     t.string "name", null: false
+    t.string "description"
     t.bigint "creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

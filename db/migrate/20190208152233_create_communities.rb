@@ -4,6 +4,7 @@ class CreateCommunities < ActiveRecord::Migration[5.2]
   def change
     create_table :communities do |t|
       t.string :name, null: false
+      t.string :description
       t.belongs_to :creator, index: true, foreign_key: { to_table: :users }
 
       t.timestamps

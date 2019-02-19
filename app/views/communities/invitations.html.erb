@@ -1,0 +1,52 @@
+<%= render "communities/shared/header" %>
+
+<div class="container">
+  <%= form_for [@community, Invitation.new] do |f| %> <%= f.hidden_field :community_id, value:
+  @community.id %>
+
+  <div class="field has-addons">
+    <div class="control is-expanded">
+      <%= f.text_field :handle, autofocus: true, placeholder: "Username or email", required: true, class: "input" %>
+    </div>
+    <div class="control">
+      <%= f.submit "Invite", class: "button" %>
+    </div>
+  </div>
+
+  <% end %>
+
+  <h3 class="title">Pending invitations</h3>
+  <% if @community.invitations.empty? %>
+  <p>None.</p>
+  <% else %>
+
+  <table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Username</th>
+        <th>Sent on</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @community.invitations.each do |invitation| %>
+      <tr>
+        <td><%= invitation.email %></td>
+        <td><%= invitation.user.nil? ? nil : invitation.user.username %></td>
+        <td><%= invitation.created_at %></td>
+        <td>
+          <% if invitation.accepted? %>
+          <span class="tag is-success"><%= invitation.status %></span>
+          <% elsif invitation.rejected? %>
+          <span class="tag is-danger"><%= invitation.status %></span>
+          <% else %>
+          <span class="tag is-info"><%= invitation.status %></span>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+</div>

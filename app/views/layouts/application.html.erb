@@ -2,19 +2,22 @@
 <html>
   <head>
     <title>NewsletterApp</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %> <%= csp_meta_tag %> <%= stylesheet_link_tag 'application', media: 'all',
+    'data-turbolinks-track': 'reload' %> <%= javascript_include_tag 'application',
+    'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%# flash messages %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <% if user_signed_in? %>
-      <%# show navbar only if user signed in %>
-      <%= render '/layouts/nav_signed_in' %>
-    <% end %>
+    <% if user_signed_in? %> <%= render '/layouts/nav_signed_in' %> <% end %>
+
+    <div class="container">
+      <% flash.each do |key, value| %>
+      <div class="notice notification is-<%= key%>">
+        <button class="delete"></button>
+        <%= value %>
+      </div>
+      <% end %>
+    </div>
+
     <%= yield %>
   </body>
 </html>

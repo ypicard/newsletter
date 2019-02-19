@@ -1,4 +1,6 @@
-<h1>Links#new</h1>
+<%= render "communities/shared/header" %>
+
+<div class="container">
 
 <%= form_for [@community, @link] do |f| %>
 <% if @link.errors.any? %>
@@ -7,4 +9,4 @@
   <%= f.label :url %>
   <%= f.text_field :url %>
   <%= f.submit %>
-<% end %>
+<% end %></div>

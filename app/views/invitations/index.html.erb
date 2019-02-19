@@ -1,7 +1,16 @@
-<% if @invitations.any? %>
-  <% @invitations.each do |invitation| %>
-    <div><%= invitation.to_json%></div>
-  <% end %>
-<% else %>
-  <div>No invites</div>
-<%end %>
+<section class="section">
+  <div class="container">
+    <h1 class="title is-1">
+      Invitations.
+    </h1>
+    <% if current_user.invitations.empty? %>
+    <div>No invites</div>
+    <% else %> <% current_user.invitations.each do |invitation| %>
+    <div><%= invitation.to_json %></div>
+    <% if invitation.pending? %> <%= button_to 'Accept', { controller:
+    :invitations, action: :accept, method: :post, community_id: invitation.community.id, id:
+    invitation.id } %> <%= button_to 'Reject', { controller: :invitations, action: :reject, method:
+    :post, community_id: invitation.community.id, id: invitation.id } %> <% end %> <% end %> <% end
+    %>
+  </div>
+</section>
