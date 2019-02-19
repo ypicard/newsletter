@@ -18,9 +18,11 @@
       <%= link_to 'Your communities', communities_path, class: "navbar-item" %>
       <%= link_to invitations_path, class: "navbar-item" do %>
         Invitations
-        <span class="tag is-info">
-          <%= current_user.invitations.size %>
-        </span>
+        <% if current_user.invitations.where(status: Invitation::PENDING).any? %>
+          <span class="tag is-info">
+            <%= current_user.invitations.where(status: Invitation::PENDING).size %>
+          </span>
+        <%end%>
       <% end %>
     </div>
     <div class="navbar-end">

@@ -4,7 +4,7 @@ class Community < ApplicationRecord
   validates :name, uniqueness: true, presence: true, allow_blank: false
 
   has_many :memberships
-  has_many :users, through: :memberships
+  has_many :users, -> { distinct }, through: :memberships
   has_many :invitations
   has_many :links
   has_many :newsletters
