@@ -1,12 +1,20 @@
-<%= render "communities/shared/header" %>
-
+<%= render "communities/shared/header", tab: "post" %>
 <div class="container">
-
-<%= form_for [@community, @link] do |f| %>
-<% if @link.errors.any? %>
-  <%= @link.errors.full_messages %>
+  <%= form_for [@community, @link] do |f| %>
+    <div class="field">
+      <%= f.label "Share a link with this community:", class: "label"%>
+      <div class="control">
+        <%= f.text_field :url, class: "input", placeholder: "Link url" %>
+      </div>
+      <p class="help is-danger">
+        <%= @link.errors.full_messages.join(', ') if @link.errors.any?%>
+      </p>
+    </div>
+    <div class="field">
+      <div class="control">
+        <%= f.submit "Send", class: "button is-primary" %>
+      </div>
+    </div>
+  </div>
 <% end %>
-  <%= f.label :url %>
-  <%= f.text_field :url %>
-  <%= f.submit %>
-<% end %></div>
+</div>

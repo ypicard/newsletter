@@ -8,16 +8,17 @@ Rails.application.routes.draw do
   devise_for :users
   resources :invitations do
     post :accept, on: :member
-      post :reject, on: :member
+    post :reject, on: :member
   end
 
   resources :communities do
     resources :links
-    resources :newsletters do 
+    resources :newsletters do
       post :send_email, on: :member
     end
 
     get '/invitations', to: 'communities#invitations'
     post '/invitations', to: 'communities#create_invitation'
+    get '/invitations/new', to: 'communities#new_invitation'
   end
 end

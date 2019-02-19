@@ -1,20 +1,6 @@
-<%= render "communities/shared/header" %>
+<%= render "communities/shared/header", tab: "invitations"%>
 
 <div class="container">
-  <%= form_for [@community, Invitation.new] do |f| %> <%= f.hidden_field :community_id, value:
-  @community.id %>
-
-  <div class="field has-addons">
-    <div class="control is-expanded">
-      <%= f.text_field :handle, autofocus: true, placeholder: "Username or email", required: true, class: "input" %>
-    </div>
-    <div class="control">
-      <%= f.submit "Invite", class: "button" %>
-    </div>
-  </div>
-
-  <% end %>
-
   <h3 class="title">Pending invitations</h3>
   <% if @community.invitations.empty? %>
   <p>None.</p>

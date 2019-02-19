@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class CommunitiesController < ApplicationController
+  before_action :fetch_community
+
   def index; end
 
-  def show
-    @community = Community.where(id: params[:id]).first
-  end
+  def show; end
 
   def new
     @community = Community.new
@@ -24,39 +24,46 @@ class CommunitiesController < ApplicationController
   end
 
   def invitations
-    @community = Community.where(id: params[:community_id]).first
     render 'invitations'
   end
 
+  def new_invitation
+    @invitation = Invitation.new
+  end
+
   def create_invitation
-    @community = Community.where(id: params[:community_id]).first
     @invitation = Invitation.new(sender: current_user, community: @community)
-    
+
     handle = invitation_params[:handle]
     invitee = User.where(username: handle).or(User.where(email: handle)).first
 
     if invitee.nil?
       # If handle is an email
-      if  !(handle =~ URI::MailTo::EMAIL_REGEXP).nil?
+      if !(handle =~ URI::MailTo::EMAIL_REGEXP).nil?
         @invitation.email = handle
-      else 
+      else
         flash[:warning] = 'Username not found or invalid email'
-        render 'invitations'
+        render 'new_invitation'
         return
       end
-    else 
+    else
       @invitation.user = invitee
       @invitation.email = invitee.email
     end
 
     if @invitation.save
       flash[:primary] = 'Invite sent'
+      render 'invitations'
+    else
+      render 'new_invitation'
     end
-    render 'invitations'
-
   end
 
   private
+
+  def fetch_community
+    @community = Community.where(id: [params[:community_id], params[:id]]).first
+  end
 
   def community_params
     params.require(:community).permit(:name)

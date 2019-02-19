@@ -4,13 +4,41 @@
       Invitations.
     </h1>
     <% if current_user.invitations.empty? %>
-    <div>No invites</div>
-    <% else %> <% current_user.invitations.each do |invitation| %>
-    <div><%= invitation.to_json %></div>
-    <% if invitation.pending? %> <%= button_to 'Accept', { controller:
-    :invitations, action: :accept, method: :post, community_id: invitation.community.id, id:
-    invitation.id } %> <%= button_to 'Reject', { controller: :invitations, action: :reject, method:
-    :post, community_id: invitation.community.id, id: invitation.id } %> <% end %> <% end %> <% end
-    %>
+      <div>No invites</div>
+    <% else %>
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>Community</th>
+            <th>Invited by</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.invitations.each do |invitation| %>
+            <tr>
+              <td><%= invitation.community.name %></td>
+              <td><%= invitation.sender.username %></td>
+              <td>
+                <% if invitation.accepted? %>
+                  <span class="tag is-success"><%= invitation.status %></span>
+                <% elsif invitation.rejected? %>
+                  <span class="tag is-danger"><%= invitation.status %></span>
+                <% else %>
+                  <span class="tag is-info"><%= invitation.status %></span>
+                <% end %>
+              </td>
+              <td>
+                <% if invitation.pending? %>
+                  <%= button_to 'Accept', accept_invitation_path(invitation), class:"button is-small is-primary", form_class: "is-inline" %>
+                  <%= button_to 'Reject', reject_invitation_path(invitation), class:"button is-small is-warning", form_class: "is-inline" %>
+                <%end%>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
   </div>
 </section>
