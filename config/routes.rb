@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   resources :invitations do
     post :accept, on: :member
     post :reject, on: :member
-    post :revoke, on: :member
   end
 
   resources :communities do
@@ -21,5 +20,6 @@ Rails.application.routes.draw do
     get '/invitations', to: 'communities#invitations'
     post '/invitations', to: 'communities#create_invitation'
     get '/invitations/new', to: 'communities#new_invitation'
+    post '/invitations/:id/revoke', to: 'communities#revoke_invitation'
   end
 end

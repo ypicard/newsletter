@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CommunitiesController < ApplicationController
-  before_action :fetch_community
+  before_action :fetch_community, except: %i[index new]
 
   def index; end
 
@@ -59,10 +59,25 @@ class CommunitiesController < ApplicationController
     end
   end
 
+  def revoke_invitation
+    invitation = @community.invitations.where(sender: current_user, id: params[:id]).first
+    if invitation.nil?
+      flash[:warning] = 'You do not have access to this invitation'
+    else
+      invitation.revoke
+      invitation.save
+      end
+    render 'invitations'
+  end
+
   private
 
   def fetch_community
-    @community = Community.where(id: [params[:community_id], params[:id]]).first
+    @community = current_user.communities.where(id: [params[:community_id], params[:id]]).first
+    if @community.nil?
+      flash[:warning] = 'You do not have access to this community'
+      render :index
+    end
   end
 
   def community_params
