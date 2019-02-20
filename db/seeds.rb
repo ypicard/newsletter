@@ -8,7 +8,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(username: 'lewarthog', email: 'lewarthog@hotmail.com', password: 'lewarthog')
-Community.create(name:"Devs", description: "Useful programming links", creator: User.first, users: [User.first])
-Link.create(url: 'https://www.theverge.com', user: User.first, community: Community.first)
-Invitation.create(sender: User.first, user: User.first, community: Community.first)
+lewarthog = User.create(username: 'lewarthog', email: 'lewarthog@hotmail.com', password: 'lewarthog')
+leslie = User.create(username: 'leslie', email: 'leslie@hotmail.com', password: 'leslie')
+Community.create(name:"Devs", description: "Useful programming links", creator: lewarthog, users: [lewarthog])
+Community.create(name:"Vuitton", description: "Sacs et souliers", creator: leslie, users: [leslie])
+Link.create(url: 'https://www.theverge.com', user: lewarthog, community: Community.first)

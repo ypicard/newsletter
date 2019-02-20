@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :invitations do
     post :accept, on: :member
     post :reject, on: :member
+    post :revoke, on: :member
   end
 
   resources :communities do

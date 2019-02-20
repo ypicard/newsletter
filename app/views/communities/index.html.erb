@@ -5,19 +5,35 @@
     </h1>
   </div>
 </section>
-<% current_user.communities.each do |community| %> <%= link_to community_path(community) do %>
-    <section class="hero is-primary is-bold">
-      <div class="hero-body">
-        <div class="container is-flex" style="justify-content: space-between; align-items: center;">
-          <div>
-            <h1 class="title"><%= community.name %></h1>
-            <h2 class="subtitle"><%= community.description %></h2>
-          </div>
-          <p><%= pluralize(community.users.size, 'member') %></p>
+<% current_user.communities.each do |community| %>
+<section class="hero is-bold <%= random_bulma_color_class %>">
+  <div class="hero-body">
+    <div class="container">
+      <%= link_to community_path(community) do %>
+
+      <div class="is-flex margin-bottom" style="justify-content: space-between; align-items: center;">
+        <div>
+          <h1 class="title"><%= community.name %></h1>
+          <h2 class="subtitle"><%= community.description %></h2>
+        </div>
+        <p><%= pluralize(community.users.size, 'member') %></p>
+      </div>
+      <% end %>
+       <%= form_for [community, Link.new] do |f| %>
+      <div class="field has-addons">
+        <div class="control">
+          <%= f.text_field :url, class: "input", placeholder: "Link url" %>
+        </div>
+        <div class="control">
+          <%= f.submit "Post", class: "button" %>
         </div>
       </div>
-    </section>
-  <% end %> <% end %>
+
+      <% end %>
+    </div>
+  </div>
+</section>
+<% end %>
 <section class="section">
   <div class="container has-text-centered">
     <%= link_to "Create yours now", new_community_path, class: "button is-link is-large" %>

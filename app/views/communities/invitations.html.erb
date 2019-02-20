@@ -12,7 +12,9 @@
         <th>Email</th>
         <th>Username</th>
         <th>Sent on</th>
+        <th>Sent by</th>
         <th>Status</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -21,14 +23,22 @@
         <td><%= invitation.email %></td>
         <td><%= invitation.user.nil? ? nil : invitation.user.username %></td>
         <td><%= invitation.created_at %></td>
+        <td><%= invitation.sender.username %></td>
         <td>
           <% if invitation.accepted? %>
           <span class="tag is-success"><%= invitation.status %></span>
           <% elsif invitation.rejected? %>
-          <span class="tag is-danger"><%= invitation.status %></span>
+          <span class="tag is-warning"><%= invitation.status %></span>
+          <% elsif invitation.revoked? %>
+          <span class="tag is-dark"><%= invitation.status %></span>
           <% else %>
           <span class="tag is-info"><%= invitation.status %></span>
           <% end %>
+        </td>
+        <td>
+            <% if invitation.pending? %>
+              <%= button_to 'Revoke', revoke_invitation_path(invitation), class:"button is-small is-danger", form_class: "is-inline" %>
+            <% end %>
         </td>
       </tr>
       <% end %>

@@ -4,6 +4,7 @@ class Invitation < ApplicationRecord
   ACCEPTED = 'ACCEPTED'
   REJECTED = 'REJECTED'
   PENDING = 'PENDING'
+  REVOKED = 'REVOKED'
 
   belongs_to :sender, class_name: :User
   belongs_to :user, optional: true
@@ -17,24 +18,30 @@ class Invitation < ApplicationRecord
   def accept
     self.status = ACCEPTED
     user.communities << community
-    save
   end
 
   def reject
     self.status = REJECTED
-    save
+  end
+
+  def revoke
+    self.status = REVOKED
   end
 
   def pending?
-    status.eql?(Invitation::PENDING)
+    status.eql?(PENDING)
   end
 
   def accepted?
-    status.eql?(Invitation::ACCEPTED)
+    status.eql?(ACCEPTED)
   end
 
   def rejected?
-    status.eql?(Invitation::REJECTED)
+    status.eql?(REJECTED)
+  end
+
+  def revoked?
+    status.eql?(REVOKED)
   end
 
   private
