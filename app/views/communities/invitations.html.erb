@@ -9,10 +9,9 @@
   <table class="table is-fullwidth">
     <thead>
       <tr>
-        <th>Email</th>
-        <th>Username</th>
-        <th>Sent on</th>
+        <th>Sent to</th>
         <th>Sent by</th>
+        <th>Sent on</th>
         <th>Status</th>
         <th>Action</th>
       </tr>
@@ -20,10 +19,9 @@
     <tbody>
       <% @community.invitations.each do |invitation| %>
       <tr>
-        <td><%= invitation.email %></td>
-        <td><%= invitation.user.nil? ? nil : invitation.user.username %></td>
-        <td><%= invitation.created_at %></td>
+        <td><%= invitation.email %> <%= invitation.user.nil? ? nil : ' - ' + invitation.user.username %></td>
         <td><%= invitation.sender.username %></td>
+        <td><%= invitation.created_at %></td>
         <td>
           <% if invitation.accepted? %>
           <span class="tag is-success"><%= invitation.status %></span>

@@ -6,7 +6,7 @@
   </div>
 </section>
 <% current_user.communities.each do |community| %>
-<section class="hero is-bold <%= random_bulma_color_class %>">
+<section class="hero is-bold <%= background_color_class(community) %>">
   <div class="hero-body">
     <div class="container">
       <%= link_to community_path(community) do %>
@@ -35,7 +35,7 @@
 </section>
 <% end %>
 <section class="section">
-  <div class="container has-text-centered">
-    <%= link_to "Create yours now", new_community_path, class: "button is-link is-large" %>
+  <div class="container">
+    <%= link_to "Create a new community", new_community_path, class: "button is-primary is-large" %>
   </div>
 </section>
