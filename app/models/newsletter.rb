@@ -12,13 +12,21 @@ class Newsletter < ApplicationRecord
 
   validates :period, inclusion: { in: PERIODS }
 
+  before_create :newsletter_is_unique
+
+  def newsletter_is_unique
+    if community.newsletters.where(period: period, week: week, month: month, year: year).any?
+      errors.add(:this_newsletter, 'already exists')
+      throw(:abort)
+    end
+  end
+
   def name
-    community.name + ' newsletter #' + community.newsletters.count.to_s + ' (' + period + ' ' + week.to_s + ')'
+    community.name + ' newsletter (' + period + ' ' + week.to_s + ')'
   end
 
   def send_email
-    ap 'TODO: SEND'
-    self.delivered = true # TODO: if success
-    NewsletterMailer.weekly_newsletter_email(community, users, links).deliver_later
+    NewsletterMailer.weekly_newsletter_email(community, users.to_a, links.to_a).deliver_later
+    self.delivered = true
   end
 end

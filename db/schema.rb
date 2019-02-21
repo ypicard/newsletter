@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_02_10_164831) do
     t.bigint "community_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["community_id", "period", "week", "month", "year"], name: "index_newsletters_on_community_period_date", unique: true
     t.index ["community_id"], name: "index_newsletters_on_community_id"
   end
 

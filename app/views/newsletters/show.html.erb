@@ -1,0 +1,18 @@
+<%= render "communities/shared/header", tab: "newsletters" %>
+
+<section class="section">
+  <div class="container">
+      <p>Period <%= @newsletter.period %></p>
+      <p>Week <%= @newsletter.week %></p>
+      <p>Month <%= @newsletter.month %></p>
+      <p>Year <%= @newsletter.year %></p>
+      <p>Links: <%= @newsletter.links.count %></p>
+    <% @newsletter.links.each do |link| %>
+    <%= link.to_json %>
+    <% end %>
+    <p>Users: <%= @newsletter.users.count %></p>
+    <% @newsletter.users.each do |user| %>
+    <%= user.to_json %>
+    <% end %>
+  </div>
+</section>

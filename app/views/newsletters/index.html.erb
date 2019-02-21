@@ -12,6 +12,7 @@
           <th>Period</th>
           <th>#Links</th>
           <th>Deliverd</th>
+          <th>Preview</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -26,10 +27,13 @@
           <td><%= newsletter.links.count %></td>
           <td><%= newsletter.delivered %></td>
           <td>
-            <%= link_to "Preview", url: 'test',
-            class: "button" %>
+            <%= link_to "Show", community_newsletter_path(@community, newsletter), class: "button" %>
+          </td>
+          <td>
+            <% if !newsletter.delivered? %>
             <%= button_to "Send", send_email_community_newsletter_path(@community, newsletter),
-            class: "button" %>
+            class: "button is-primary is-small" %>
+            <% end %>
           </td>
         </tr>
         <% end %>
