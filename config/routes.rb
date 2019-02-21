@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   root 'communities#index'
   get 'links/new'
   get 'links/index'
-  
 
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
 
   resources :invitations do
     post :accept, on: :member

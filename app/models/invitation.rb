@@ -47,7 +47,7 @@ class Invitation < ApplicationRecord
   private
 
   def send_new_invitation_email
-    InvitationMailer.new_invitation_email(email, community).deliver_later
+    InvitationMailer.new_invitation_email(self).deliver_later
   end
 
   def generate_token

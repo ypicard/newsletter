@@ -2,9 +2,14 @@
   <div class="hero-body">
     <div class="container">
       <h2 class="title">Sign up</h2>
-
+      <% unless @invitation.nil? %>
+        <h3 class="subtitle">To join the community <%= @invitation.community.name %> (<%= @invitation.community.description %>)
+        </h3>
+      <% end %>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %> <%=
       render "devise/shared/error_messages", resource: resource %>
+
+      <%= f.hidden_field :invitation_token, value: params[:invitation_token] %>
 
       <div class="field">
         <%= f.label :email, class:"label" %>

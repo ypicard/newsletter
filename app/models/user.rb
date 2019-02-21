@@ -16,10 +16,13 @@ class User < ApplicationRecord
   has_many :invitations
   has_many :links
 
+  attr_accessor :invitation_token
+
   private
 
-  # Link pending email based invitations after user creation
+  # Link token based invitations to user after creation
   def update_invitations
-    invitations << Invitation.where(email: email)
+    # user: nil is here to make sure invitations are linked only once
+    invitations << Invitation.where(token: invitation_token, user: nil)
   end
 end

@@ -19,7 +19,10 @@
     <tbody>
       <% @community.invitations.each do |invitation| %>
       <tr>
-        <td><%= invitation.email %> <%= invitation.user.nil? ? nil : ' - ' + invitation.user.username %></td>
+        <td>
+          <%= invitation.email %> <%= invitation.user.nil? ? nil : ' - ' + invitation.user.username
+          %>
+        </td>
         <td><%= invitation.sender.username %></td>
         <td><%= invitation.created_at %></td>
         <td>
@@ -34,9 +37,9 @@
           <% end %>
         </td>
         <td>
-            <% if invitation.pending? %>
-              <%= button_to 'Revoke', revoke_invitation_path(invitation), class:"button is-small is-danger", form_class: "is-inline" %>
-            <% end %>
+          <% if invitation.pending? %> <%= button_to 'Revoke', controller: :communities, action:
+          :revoke_invitation,method: :post, id: invitation.id, class:"button is-small is-danger"%>
+          <% end %>
         </td>
       </tr>
       <% end %>

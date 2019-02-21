@@ -1,11 +1,13 @@
-
 <!DOCTYPE html>
 <html>
   <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-   
-    <p>Thanks for joining and have a great day!</p>
+    <p>
+      <%= @invitation.sender.username %> has invited you to join the community: <%= @invitation.community.name %> (<%=
+      @invitation.community.description %>)
+    </p>
+    <%= link_to 'Join community !', new_user_registration_url(invitation_token: @invitation.token), target: "_blank" %>
   </body>
 </html>

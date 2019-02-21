@@ -1,14 +1,16 @@
-<% if @links.empty? %>
-  No links for this week
-<% else %>
-  <% @links.each do |link| %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <% if @links.empty? %> No links for this week <% else %> <% @links.each do |link| %>
     <p>
-      Title: <%= link.title %><br>
-      Desc: <%= link.description %><br>
-      <% if link.image.present? %>
-        <%= image_tag(link.image, height: "50") %><br>
-      <% end %>
-      Link: <%= link_to(link.url, link.url) %>
+      Title: <%= link.title %><br />
+      Desc: <%= link.description %><br />
+      <% if link.image.present? %> <%= image_tag(link.image, height: "50") %><br />
+      <% end %> Link: <%= link_to(link.url, link.url) %>
     </p>
-  <% end %>
-<% end %>
+    <% end %> <% end %>
+  </body>
+</html>
