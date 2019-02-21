@@ -35,11 +35,3 @@
 
   <% end %>
 </div>
-
-<h2>Latest newsletters</h2>
-<% @community.newsletters.each do |newsletter| %> <%= newsletter.to_json %> <%= button_to "Send",
-send_email_community_newsletter_path(@community, newsletter), :class => "button" %> <% end %>
-
-<div>
-  <%= link_to "Generate newsletter", new_community_newsletter_path(@community) %>
-</div>
