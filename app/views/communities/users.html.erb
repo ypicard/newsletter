@@ -1,0 +1,21 @@
+<%= render "communities/shared/header", tab: "users" %>
+
+<div class="container">
+
+  <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @community.users.each do |user| %>
+          <tr>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+</div>

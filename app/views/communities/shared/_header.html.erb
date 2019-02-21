@@ -13,6 +13,8 @@
       #{'is-info' if tab == 'invite'}" %>
       <%= link_to "Past newsletters", community_newsletters_path(@community), class: "button
       #{'is-info' if tab == 'newsletters'}" %>
+      <%= link_to "Members", community_users_path(@community), class: "button
+      #{'is-info' if tab == 'users'}" %>
     </div>
   </div>
 </section>

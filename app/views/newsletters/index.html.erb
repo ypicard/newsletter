@@ -1,47 +1,44 @@
 <%= render "communities/shared/header", tab: "newsletters" %>
 
-<section class="section">
-  <div class="container">
-    <table class="table is-fullwidth">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Week</th>
-          <th>Month</th>
-          <th>Year</th>
-          <th>Period</th>
-          <th>#Links</th>
-          <th>Deliverd</th>
-          <th>Preview</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @community.newsletters.each do |newsletter| %>
-        <tr>
-          <td><%= newsletter.name %></td>
-          <td><%= newsletter.week %></td>
-          <td><%= newsletter.month %></td>
-          <td><%= newsletter.year %></td>
-          <td><%= newsletter.period %></td>
-          <td><%= newsletter.links.count %></td>
-          <td><%= newsletter.delivered %></td>
-          <td>
-            <%= link_to "Show", community_newsletter_path(@community, newsletter), class: "button" %>
-          </td>
-          <td>
-            <% if !newsletter.delivered? %>
-            <%= button_to "Send", send_email_community_newsletter_path(@community, newsletter),
-            class: "button is-primary is-small" %>
-            <% end %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+<div class="container">
+  <table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Week</th>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Period</th>
+        <th>#Links</th>
+        <th>Deliverd</th>
+        <th>Preview</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @community.newsletters.each do |newsletter| %>
+      <tr>
+        <td><%= newsletter.name %></td>
+        <td><%= newsletter.week %></td>
+        <td><%= newsletter.month %></td>
+        <td><%= newsletter.year %></td>
+        <td><%= newsletter.period %></td>
+        <td><%= newsletter.links.count %></td>
+        <td><%= newsletter.delivered %></td>
+        <td>
+          <%= link_to "Show", community_newsletter_path(@community, newsletter), class: "button" %>
+        </td>
+        <td>
+          <% if !newsletter.delivered? %> <%= button_to "Send",
+          send_email_community_newsletter_path(@community, newsletter), class: "button is-primary
+          is-small" %> <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-    <div>
-      <%= link_to "Generate newsletter", new_community_newsletter_path(@community) %>
-    </div>
+  <div>
+    <%= link_to "Generate newsletter", new_community_newsletter_path(@community) %>
   </div>
-</section>
+</div>

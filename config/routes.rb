@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root 'communities#index'
   get 'links/new'
   get 'links/index'
-  root 'application#home'
+  
 
   devise_for :users
+
   resources :invitations do
     post :accept, on: :member
     post :reject, on: :member
@@ -16,7 +18,7 @@ Rails.application.routes.draw do
     resources :newsletters do
       post :send_email, on: :member
     end
-
+    get '/users', to: 'communities#users'
     get '/invitations', to: 'communities#invitations'
     post '/invitations', to: 'communities#create_invitation'
     get '/invitations/new', to: 'communities#new_invitation'

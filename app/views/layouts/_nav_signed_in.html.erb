@@ -15,7 +15,6 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-start">
-      <%= link_to 'Your communities', communities_path, class: "navbar-item" %>
       <%= link_to invitations_path, class: "navbar-item" do %>
         Invitations
         <% if current_user.invitations.where(status: Invitation::PENDING).any? %>
@@ -26,7 +25,8 @@
       <% end %>
     </div>
     <div class="navbar-end">
-      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "navbar-item" %>
+        <%= link_to 'Profile', edit_user_registration_path, class: "navbar-item" %>
+        <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "navbar-item" %>
     </div>
   </div>
 </nav>

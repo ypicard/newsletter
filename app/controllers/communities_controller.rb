@@ -70,6 +70,9 @@ class CommunitiesController < ApplicationController
     render 'invitations'
   end
 
+  def users;
+  end
+
   private
 
   def fetch_community
