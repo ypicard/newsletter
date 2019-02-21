@@ -14,3 +14,18 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+// delete bulma notifications on .delete click
+document.addEventListener(
+  'DOMContentLoaded',
+  function() {
+    var deletes = document.getElementsByClassName('delete');
+    for (var i = 0; i < deletes.length; i++) {
+      var el = deletes[i];
+      el.onclick = function() {
+        el.parentElement.remove();
+      };
+    }
+  },
+  false
+);
