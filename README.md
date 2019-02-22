@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This platform aims at making sharing links with communities a whole lot easier. Just share a link on it whenever you read something interesting and a newsletter containing all the current week's links will be sent to each member every Sunday.
 
-Things you may want to cover:
+## Environment
+```
+LINKPREVIEW_API_KEY: ...
+MAILGUN_API_KEY: ...
+MAILGUN_DOMAIN: ...
+```
 
-* Ruby version
+## Mails
+This app uses [Mailgun](https://www.mailgun.com)'s service to send out mail invitations and newsletters.
 
-* System dependencies
+## Tests
+Uses [Rspec](http://rspec.info).
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
