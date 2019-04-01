@@ -70,4 +70,9 @@ Rails.application.configure do
     api_key: ENV['MAILGUN_API_KEY'],
     domain: ENV['MAILGUN_DOMAIN']
   }
+
+  # Logger
+  logger = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.logger = ActiveSupport::TaggedLogging.new(logger)
 end

@@ -11,14 +11,12 @@ class NewslettersController < ApplicationController
 
   def new
     @community = Community.where(id: params[:community_id]).first
-    date = Date.today
-    @newsletter = @community.generate_newsletter(Newsletter::WEEKLY, date.cweek, date.month, date.year)
+    @newsletter = @community.generate_and_update_newsletter_for_current_week
   end
 
   def create
     @community = Community.where(id: params[:community_id]).first
-    date = Date.today
-    @newsletter = @community.generate_newsletter(Newsletter::WEEKLY, date.cweek, date.month, date.year)
+    @newsletter = @community.generate_and_update_newsletter_for_current_week
 
     if @newsletter.save
       flash[:primary] = 'Newsletter created'
