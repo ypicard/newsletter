@@ -3,7 +3,7 @@
 <div class="container">
 
   <h3 class="title">Latest links</h3>
-  <% @community.links.each do |link| %>
+  <% @community.links.order(created_at: :desc).each do |link| %>
 
   <article class="media" href="#{link.url}">
     <figure class="media-left">

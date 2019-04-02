@@ -6,6 +6,8 @@ class Link < ApplicationRecord
 
   belongs_to :user
   belongs_to :community
+  has_many :newsletter_links
+  has_many :newsletters, -> { distinct }, through: :newsletter_links
 
   after_create :update_metadata
 

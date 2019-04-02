@@ -25,13 +25,13 @@ class Community < ApplicationRecord
                                   week: week, month: month, year: year,
                                   community: self).first
 
-    return if newsletter.delivered?
-
     if newsletter.nil?
       newsletter = Newsletter.new(period: period,
                                   week: week, month: month, year: year,
                                   community: self)
      end
+
+    return if newsletter.delivered?
 
     newsletter.update_attributes!(
       users: users,

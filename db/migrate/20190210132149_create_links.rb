@@ -9,7 +9,7 @@ class CreateLinks < ActiveRecord::Migration[5.2]
 
       t.belongs_to :user, index: true
       t.belongs_to :community, index: true
-      t.belongs_to :newsletter, index: true
+      # t.belongs_to :newsletter, index: true
 
       t.timestamps
     end
