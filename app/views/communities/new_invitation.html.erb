@@ -1,4 +1,4 @@
-<%= render "communities/shared/header", tab: "invite"%>
+<%= render "communities/shared/header", tab: "invitations"%>
 <div class="container"><%= form_for [@community, Invitation.new] do |f| %> <%= f.hidden_field :community_id, value:
   @community.id %>
     <div class="field">

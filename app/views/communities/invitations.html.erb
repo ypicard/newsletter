@@ -1,49 +1,65 @@
 <%= render "communities/shared/header", tab: "invitations"%>
-
 <div class="container">
-  <h3 class="title">Pending invitations</h3>
-  <% if @community.invitations.empty? %>
-  <p>None.</p>
-  <% else %>
-
-  <table class="table is-fullwidth">
-    <thead>
-      <tr>
-        <th>Sent to</th>
-        <th>Sent by</th>
-        <th>Sent on</th>
-        <th>Status</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @community.invitations.order(created_at: :desc).each do |invitation| %>
-      <tr>
-        <td>
-          <%= invitation.email %> <%= invitation.user.nil? ? nil : ' - ' + invitation.user.username
-          %>
-        </td>
-        <td><%= invitation.sender.username %></td>
-        <td><%= invitation.created_at %></td>
-        <td>
-          <% if invitation.accepted? %>
-          <span class="tag is-success"><%= invitation.status %></span>
-          <% elsif invitation.rejected? %>
-          <span class="tag is-warning"><%= invitation.status %></span>
-          <% elsif invitation.revoked? %>
-          <span class="tag is-dark"><%= invitation.status %></span>
-          <% else %>
-          <span class="tag is-info"><%= invitation.status %></span>
-          <% end %>
-        </td>
-        <td>
-          <% if invitation.pending? %> <%= button_to 'Revoke', controller: :communities, action:
-          :revoke_invitation,method: :post, id: invitation.id, class:"button is-small is-danger"%>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%= form_for [@community, Invitation.new] do |f| %>
+    <%= f.hidden_field :community_id, value: @community.id %>
+    <div class="field">
+      <%= f.label "Invite someone to join this community:", class: "label"%>
+      <div class="control">
+        <%= f.text_field :handle, autofocus: true, placeholder: "Username or email", required: true, class: "input" %>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <%= f.submit "Invite", class: "button is-primary" %>
+      </div>
+    </div>
   <% end %>
+</div>
+<div class="section">
+  <div class="container">
+    <h3 class="title">Pending invitations.</h3>
+    <% if @community.invitations.empty? %>
+      <p>None.</p>
+    <% else %>
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>Sent to</th>
+            <th>Sent by</th>
+            <th>Sent on</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @community.invitations.order(created_at: :desc).each do |invitation| %>
+            <tr>
+              <td>
+                <%= invitation.email %> <%= invitation.user.nil? ? nil : ' - ' + invitation.user.username
+          %>
+              </td>
+              <td><%= invitation.sender.username %></td>
+              <td><%= invitation.created_at %></td>
+              <td>
+                <% if invitation.accepted? %>
+                  <span class="tag is-success"><%= invitation.status %></span>
+                <% elsif invitation.rejected? %>
+                  <span class="tag is-warning"><%= invitation.status %></span>
+                <% elsif invitation.revoked? %>
+                  <span class="tag is-dark"><%= invitation.status %></span>
+                <% else %>
+                  <span class="tag is-info"><%= invitation.status %></span>
+                <% end %>
+              </td>
+              <td>
+                <% if invitation.pending? %>
+                  <%= button_to 'Revoke', controller: :communities, action: :revoke_invitation, id: invitation.id %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
 </div>

@@ -24,16 +24,15 @@ class CommunitiesController < ApplicationController
     end
   end
 
-  def invitations
-    render 'invitations'
-  end
+  def invitations;
+ end
 
-  def new_invitation
-    @invitation = Invitation.new
-  end
+  # def new_invitation
+  #   @invitation = Invitation.new
+  # end
 
   def create_invitation
-    @invitation = Invitation.new(sender: current_user, community: @community)
+    invitation = Invitation.new(sender: current_user, community: @community)
 
     handle = invitation_params[:handle]
     invitee = User.where(username: handle).or(User.where(email: handle)).first
@@ -41,23 +40,19 @@ class CommunitiesController < ApplicationController
     if invitee.nil?
       # If handle is an email
       if !(handle =~ URI::MailTo::EMAIL_REGEXP).nil?
-        @invitation.email = handle
+        invitation.email = handle
       else
         flash[:warning] = 'Username not found or invalid email'
-        render 'new_invitation'
+        render 'invitations'
         return
       end
     else
-      @invitation.user = invitee
-      @invitation.email = invitee.email
+      invitation.user = invitee
+      invitation.email = invitee.email
     end
 
-    if @invitation.save
-      flash[:primary] = 'Invite sent'
-      render 'invitations'
-    else
-      render 'new_invitation'
-    end
+    flash[:primary] = 'Invite sent' if invitation.save
+    render 'invitations'
   end
 
   def revoke_invitation
@@ -68,11 +63,11 @@ class CommunitiesController < ApplicationController
       invitation.revoke
       invitation.save
       end
+
     render 'invitations'
   end
 
-  def users;
-  end
+  def users; end
 
   private
 
