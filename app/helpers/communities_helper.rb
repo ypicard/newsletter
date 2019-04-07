@@ -2,7 +2,7 @@
 
 module CommunitiesHelper
   def background_color(community)
-    idx = (community.name.size * community.description.size) % BULMA_COLORS.size
+    idx = (community.name.size * (community.description || '1').size) % BULMA_COLORS.size
     BULMA_COLORS[idx]
   end
 

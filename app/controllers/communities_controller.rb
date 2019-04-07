@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CommunitiesController < ApplicationController
-  before_action :fetch_community, except: %i[index new]
+  before_action :fetch_community, except: %i[index new create]
 
   def index; end
 
@@ -16,7 +16,8 @@ class CommunitiesController < ApplicationController
     @community.creator = current_user
     @community.users << current_user
     if @community.save
-      flash[:primary] = 'Community created'
+      flash[:primary] = 'Community created: welcome !'
+      render action: 'show'
     else
       flash[:warning] = 'Something went wrong'
       render action: 'new'

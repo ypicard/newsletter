@@ -8,6 +8,11 @@
       <%= @invitation.sender.username %> has invited you to join the community: <%= @invitation.community.name %> (<%=
       @invitation.community.description %>)
     </p>
-    <%= link_to 'Join community !', new_user_registration_url(invitation_token: @invitation.token), target: "_blank" %>
+    <p>
+      If you already have an account, <%= link_to "login and join the community", :invitations, target: "_blank" %>
+    </p>
+    <p>
+      If not, <%= link_to 'create an account first', new_user_registration_url(invitation_token: @invitation.token), target: "_blank" %> !
+    </p>
   </body>
 </html>

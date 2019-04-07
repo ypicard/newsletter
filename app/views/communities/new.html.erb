@@ -1,8 +1,29 @@
-<%= form_for(@community) do |f| %>
-<% if @community.errors.any? %>
-  <%= @community.errors.full_messages %>
-<% end %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.submit %>
-<% end %>
+<section class="section">
+  <div class="container">
+    <h1 class="title is-1">
+      Your communities.
+    </h1>
+  </div>
+</section>
+
+<div class="container">
+  <%= form_for(@community) do |f| %>
+    <% if @community.errors.any? %>
+      <%= @community.errors.full_messages %>
+    <% end %>
+    <div class="field">
+      <%= f.label "Create your own community", class: "label"%>
+      <div class="control">
+        <%= f.text_field :name, class: "input", placeholder: "Name" %>
+      </div>
+      <p class="help is-danger">
+        <%= @community.errors.full_messages.join(', ') if @community.errors.any? %>
+      </p>
+    </div>
+    <div class="field">
+      <div class="control">
+        <%= f.submit "Create", class: "button is-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>

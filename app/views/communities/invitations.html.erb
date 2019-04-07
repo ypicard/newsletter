@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @community.invitations.each do |invitation| %>
+      <% @community.invitations.order(created_at: :desc).each do |invitation| %>
       <tr>
         <td>
           <%= invitation.email %> <%= invitation.user.nil? ? nil : ' - ' + invitation.user.username

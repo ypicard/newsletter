@@ -26,7 +26,7 @@ class Newsletter < ApplicationRecord
   end
 
   def send_email
-    NewsletterMailer.weekly_newsletter_email(community, users.to_a, links.to_a).deliver_later
+    NewsletterMailer.weekly_newsletter_email(self).deliver_later
     self.delivered = true
     save
     delivered
