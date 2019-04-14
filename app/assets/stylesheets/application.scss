@@ -20,3 +20,10 @@
 .margin-bottom {
   margin-bottom: 1rem;
 }
+
+.notice {
+  position: absolute;
+  width: 100%;
+  margin: 10px;
+  z-index: 10;
+}

@@ -7,8 +7,7 @@
       <%= link_to "Post link", new_community_link_path(@community), class: "button #{'is-info' if tab == 'post'}" %>
       <%= link_to "Latest links", community_path(@community), class: "button #{'is-info' if tab == 'links'}" %>
       <%= link_to "Past newsletters", community_newsletters_path(@community), class: "button #{'is-info' if tab == 'newsletters'}" %>
-      <%= link_to "Members", community_users_path(@community), class: "button #{'is-info' if tab == 'users'}" %>
-      <%= link_to "Invitations", community_invitations_path(@community), class: "button #{'is-info' if tab == 'invitations'}" %>
+      <%= link_to "Members & invitations", community_invitations_path(@community), class: "button #{'is-info' if tab == 'invitations'}" %>
     </div>
   </div>
 </section>

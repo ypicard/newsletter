@@ -12,7 +12,9 @@ class LinksController < ApplicationController
     @link = Link.new(link_params.merge(user: current_user, community: @community))
 
     if @link.save
-      flash[:primary] = 'Link published'
+      flash[:success] = 'Link published'
+      redirect_to community_url(@community)
+      # redirect_to controller: :community, action: :show
     else
       render 'new'
     end

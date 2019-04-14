@@ -1,36 +1,35 @@
 <%= render "communities/shared/header", tab: "links" %>
-
 <div class="container">
-
+  <% if @community.links.empty? %>
+    <p>None.</p>
+  <% end %>
   <% @community.links.order(created_at: :desc).each do |link| %>
-
-  <article class="media" href="#{link.url}">
-    <figure class="media-left">
-      <p class="image is-64x64">
-        <%= image_tag(link.image) %>
-      </p>
-    </figure>
-    <div class="media-content">
-      <div class="content">
-        <p>
-          <strong
+    <article class="media" href="#{link.url}">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <%= image_tag(link.image) %>
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong
             ><%= link.title %> <%= link_to link.url, target: "_blank" do %>
-            <span class="icon">
-              <%= fa_icon "external-link" %>
-            </span>
-            <% end %>
-          </strong>
-          <br />
-          <%= link.description %>
-          <br />
-          <small
+                <span class="icon">
+                  <%= fa_icon "external-link" %>
+                </span>
+              <% end %>
+            </strong>
+            <br />
+            <%= link.description %>
+            <br />
+            <small
             >Posted by @<%= link.user.username %> (<%= link.created_at.strftime("%Y-%m-%d")
             %>)</small
           >
-        </p>
+          </p>
+        </div>
       </div>
-    </div>
-  </article>
-
+    </article>
   <% end %>
 </div>

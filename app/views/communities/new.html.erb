@@ -8,9 +8,6 @@
 
 <div class="container">
   <%= form_for(@community) do |f| %>
-    <% if @community.errors.any? %>
-      <%= @community.errors.full_messages %>
-    <% end %>
     <div class="field">
       <%= f.label "Create your own community", class: "label"%>
       <div class="control">

@@ -16,16 +16,15 @@ class CommunitiesController < ApplicationController
     @community.creator = current_user
     @community.users << current_user
     if @community.save
-      flash[:primary] = 'Community created: welcome !'
-      render action: 'show'
+      flash[:success] = 'Community created: welcome !'
+      redirect_to action: :show, id: @community.id
     else
       flash[:warning] = 'Something went wrong'
-      render action: 'new'
+      render 'new'
     end
   end
 
-  def invitations;
- end
+  def invitations; end
 
   # def new_invitation
   #   @invitation = Invitation.new
@@ -43,16 +42,19 @@ class CommunitiesController < ApplicationController
         invitation.email = handle
       else
         flash[:warning] = 'Username not found or invalid email'
-        render 'invitations'
-        return
       end
     else
-      invitation.user = invitee
-      invitation.email = invitee.email
+      # invitee not nil
+      if !@community.users.include?(invitee)
+        invitation.user = invitee
+        invitation.email = invitee.email
+        flash[:success] = 'Invite sent' if invitation.save
+      else
+        flash[:warning] = "#{invitee.username} is already a member of this community"
+      end
     end
 
-    flash[:primary] = 'Invite sent' if invitation.save
-    render 'invitations'
+    redirect_to :community_invitations
   end
 
   def revoke_invitation
@@ -64,10 +66,8 @@ class CommunitiesController < ApplicationController
       invitation.save
       end
 
-    render 'invitations'
+    redirect_to :community_invitations
   end
-
-  def users; end
 
   private
 

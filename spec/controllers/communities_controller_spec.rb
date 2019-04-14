@@ -20,6 +20,8 @@ RSpec.describe CommunitiesController do
     end
 
     it 'sends email on invite'
+
+    it 'cannot be invited twice'
   end
 
   context 'does not belong to community' do

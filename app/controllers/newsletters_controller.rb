@@ -19,7 +19,7 @@ class NewslettersController < ApplicationController
     @newsletter = @community.generate_and_update_newsletter_for_current_week
 
     if @newsletter.save
-      flash[:primary] = 'Newsletter created'
+      flash[:success] = 'Newsletter created'
     else
       flash[:warning] = @newsletter.errors.full_messages
       render :new
@@ -33,7 +33,7 @@ class NewslettersController < ApplicationController
     else
       newsletter.send_email
       if newsletter.save
-        flash[:primary] = 'Newsletter sent'
+        flash[:success] = 'Newsletter sent'
       else
         flash[:warning] = newsletter.errors.full_messages
       end
