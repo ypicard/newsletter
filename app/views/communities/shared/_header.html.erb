@@ -3,11 +3,22 @@
     <h1 class="title is-1 is-inline"><%= @community.name %>.</h1>
     <small>(<%= pluralize(@community.users.size, 'member') %>)</small>
     <h2 class="subtitle is-3"><%= @community.description %></h2>
-    <div class="buttons">
-      <%= link_to "Post link", new_community_link_path(@community), class: "button #{'is-info' if tab == 'post'}" %>
-      <%= link_to "Latest links", community_path(@community), class: "button #{'is-info' if tab == 'links'}" %>
-      <%= link_to "Past newsletters", community_newsletters_path(@community), class: "button #{'is-info' if tab == 'newsletters'}" %>
-      <%= link_to "Members & invitations", community_invitations_path(@community), class: "button #{'is-info' if tab == 'invitations'}" %>
+    <div class="tabs">
+      <ul>
+        <li class="<%= 'is-active' if tab == 'post' %>">
+          <%= link_to "Post link", new_community_link_path(@community) %>
+        </li>
+        <li class="<%= 'is-active' if tab == 'links' %>">
+          <%= link_to "Latest links", community_path(@community) %>
+        </li>
+        <li class="<%= 'is-active' if tab == 'newsletters' %>">
+          <%= link_to "Past newsletters", community_newsletters_path(@community) %>
+        </li>
+        <li class="<%= 'is-active' if tab == 'invitations' %>">
+        
+          <%= link_to "Members & invitations", community_invitations_path(@community) %>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
